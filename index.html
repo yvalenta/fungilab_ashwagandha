@@ -1,0 +1,1354 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ashwagandha — Calma Total en tu Día a Día · El Oasis Urbano</title>
+
+  <!-- Fonts: Cormorant Garamond (display, serif elegante) + Outfit (body, geométrica moderna) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Outfit:wght@400;500;600;700&display=swap"
+    rel="stylesheet" />
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Alpine.js -->
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['Cormorant Garamond', 'serif'],
+            body: ['Outfit', 'sans-serif'],
+          },
+          colors: {
+            moss: { DEFAULT: '#0E2A20', 800: '#163D2E', 600: '#1F5440' },
+            emerald2: { DEFAULT: '#129E76', light: '#34D399', dark: '#0B6E52', faint: '#EAF7F0' },
+            clay: { DEFAULT: '#BF8B56', light: '#DDB892', faint: '#F6F1E7' },
+            linen: '#F6F1E7',
+          },
+          boxShadow: {
+            card: '0 4px 24px 0 rgba(14,42,32,0.10)',
+            glow: '0 0 48px 12px rgba(18,158,118,0.24)',
+            ring: '0 0 0 3px rgba(18,158,118,0.35)',
+          },
+        },
+      },
+    }
+  </script>
+
+  <style>
+    /* ══ DESIGN TOKENS — Ashwagandha / Oasis Urbano ══ */
+    :root {
+      --moss: #0E2A20;
+      --emerald: #129E76;
+      --emerald-l: #34D399;
+      --clay: #BF8B56;
+      --clay-l: #DDB892;
+      --linen: #F6F1E7;
+      --white: #FFFFFF;
+    }
+
+    /* ══ GLOBAL ══ */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: #fff;
+      color: var(--moss);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ══ TYPOGRAPHY UTILITIES ══ */
+    .font-display {
+      font-family: 'Cormorant Garamond', serif;
+    }
+
+    /* ══ COLOR UTILITIES ══ */
+    .text-emerald2 {
+      color: var(--emerald);
+    }
+
+    .text-clay {
+      color: var(--clay);
+    }
+
+    .bg-moss {
+      background-color: var(--moss);
+    }
+
+    .bg-linen {
+      background-color: var(--linen);
+    }
+
+    .border-emerald2 {
+      border-color: var(--emerald);
+    }
+
+    /* ══ GRADIENTS ══ */
+    .gradient-emerald {
+      background: linear-gradient(135deg, #129E76 0%, #34D399 50%, #129E76 100%);
+    }
+
+    .gradient-hero {
+      background: linear-gradient(160deg, #0E2A20 0%, #163D2E 55%, #1F5440 100%);
+    }
+
+    .gradient-cta {
+      background: linear-gradient(135deg, #129E76 0%, #0B6E52 100%);
+    }
+
+    .gradient-clay {
+      background: linear-gradient(135deg, #E8D2AE 0%, #BF8B56 100%);
+    }
+
+    /* ══ DIVIDER ══ */
+    .divider-emerald {
+      width: 56px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--emerald), var(--clay-l));
+      border-radius: 999px;
+      margin: 0 auto 1.5rem;
+    }
+
+    /* ══ TABS ══ */
+    [x-cloak] {
+      display: none !important;
+    }
+
+    /* ══ STICKY CTA ══ */
+    #sticky-cta {
+      transform: translateY(100%);
+      transition: transform .35s cubic-bezier(.4, 0, .2, 1);
+    }
+
+    #sticky-cta.visible {
+      transform: translateY(0);
+    }
+
+    /* ══ REVIEW CARD ══ */
+    .review-card {
+      background: #fff;
+      border: 1px solid #e7ecdf;
+      border-radius: 1rem;
+      padding: 1.5rem;
+      box-shadow: 0 2px 12px rgba(14, 42, 32, 0.06);
+      transition: transform .25s ease, box-shadow .25s ease;
+    }
+
+    .review-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 28px rgba(18, 158, 118, .14);
+    }
+
+    /* ══ INGREDIENT CARD ══ */
+    .ingredient-card {
+      transition: transform .3s ease, box-shadow .3s ease;
+    }
+
+    .ingredient-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 32px rgba(18, 158, 118, .18);
+    }
+
+    /* ══ THUMBNAIL ══ */
+    .thumb-btn.active {
+      border-color: var(--emerald) !important;
+      opacity: 1 !important;
+    }
+
+    /* ══ SCROLLBAR HIDE ══ */
+    .no-scroll::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* ══ ANIMATIONS ══ */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .fade-up {
+      animation: fadeUp .55s ease both;
+    }
+
+    .delay-1 {
+      animation-delay: .1s;
+    }
+
+    .delay-2 {
+      animation-delay: .22s;
+    }
+
+    .delay-3 {
+      animation-delay: .34s;
+    }
+
+    .delay-4 {
+      animation-delay: .46s;
+    }
+
+    /* ══ PULSE BADGE ══ */
+    @keyframes pulse-emerald {
+
+      0%,
+      100% {
+        box-shadow: 0 0 0 0 rgba(18, 158, 118, 0.5);
+      }
+
+      50% {
+        box-shadow: 0 0 0 10px rgba(18, 158, 118, 0);
+      }
+    }
+
+    .pulse-emerald {
+      animation: pulse-emerald 2.2s ease infinite;
+    }
+
+    /* ══ STOCK BAR ══ */
+    .stock-bar {
+      background: linear-gradient(90deg, var(--emerald) 0%, var(--clay-l) 100%);
+      border-radius: 999px;
+      height: 8px;
+      width: 64%;
+      transition: width 1.2s ease;
+    }
+
+    /* ══ FIRMA VISUAL: ANILLO DE EQUILIBRIO ══ */
+    /* El anillo radial reemplaza la barra lineal de otras landings — un
+       componente más estilizado. Sube de 22% (vida sin pausas) a 94%
+       (con Ashwagandha) al cargar la página. */
+    .ring-track {
+      stroke: rgba(255, 255, 255, 0.12);
+    }
+
+    .ring-fill {
+      stroke: var(--emerald-l);
+      stroke-linecap: round;
+      stroke-dasharray: 339.292;
+      stroke-dashoffset: 264.65;
+      transition: stroke-dashoffset 1.8s cubic-bezier(.22, 1, .36, 1);
+    }
+
+    .ring-fill.balanced {
+      stroke-dashoffset: 20.36;
+    }
+
+    /* ══ FIRMA VISUAL: RESPIRACIÓN (oasis ripple) ══ */
+    .oasis-ripple {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 78%;
+      height: 78%;
+      transform: translate(-50%, -50%) scale(.85);
+      border-radius: 50%;
+      border: 1px solid rgba(52, 211, 153, 0.35);
+      animation: oasisPing 4.5s ease-out infinite;
+      pointer-events: none;
+    }
+
+    @keyframes oasisPing {
+      0% {
+        transform: translate(-50%, -50%) scale(.78);
+        opacity: .55;
+      }
+
+      100% {
+        transform: translate(-50%, -50%) scale(1.18);
+        opacity: 0;
+      }
+    }
+
+    /* ══ FIRMA VISUAL: PUNTO DE RESPIRACIÓN ══ */
+    .breathe-dot {
+      animation: breathe 10s ease-in-out infinite;
+    }
+
+    @keyframes breathe {
+
+      0%,
+      100% {
+        transform: scale(1);
+        opacity: .55;
+      }
+
+      40% {
+        transform: scale(1.7);
+        opacity: 1;
+      }
+
+      70% {
+        transform: scale(1.7);
+        opacity: 1;
+      }
+    }
+
+    /* ══ BLOBS DECORATIVOS ══ */
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(60px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ══ DIAGONAL CLIP — sección S5 ══ */
+    .clip-top {
+      clip-path: polygon(0 40px, 100% 0, 100% 100%, 0 100%);
+      margin-top: -40px;
+      padding-top: 80px;
+    }
+
+    .clip-bottom {
+      clip-path: polygon(0 0, 100% 0, 100% calc(100% - 40px), 0 100%);
+      padding-bottom: 80px;
+    }
+
+    /* ══ PRODUCT IMG ══ */
+    .product-img {
+      max-height: 520px;
+      object-fit: contain;
+      filter: drop-shadow(0 20px 56px rgba(18, 158, 118, .30));
+    }
+
+    /* ══ FAQ ══ */
+    details summary {
+      list-style: none;
+      cursor: pointer;
+    }
+
+    details summary::-webkit-details-marker {
+      display: none;
+    }
+
+    details[open] summary .icon-chevron {
+      transform: rotate(180deg);
+    }
+
+    .icon-chevron {
+      transition: transform .25s ease;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ══════════════════════════════════════════════
+     [S0] ANNOUNCEMENT BAR
+══════════════════════════════════════════════ -->
+  <div class="gradient-cta text-white text-xs sm:text-sm font-semibold text-center py-2.5 tracking-wide">
+    🇨🇴 Envío GRATIS a toda Colombia &nbsp;·&nbsp; 💵 Pago Contraentrega &nbsp;·&nbsp; 🌿 Tu pausa diaria de calma
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+     [S1] NAV STICKY
+══════════════════════════════════════════════ -->
+  <nav class="bg-moss border-b border-white/10 sticky top-0 z-40">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 flex items-center justify-between h-14">
+      <span class="font-display text-white text-lg tracking-tight">Fungi<span class="text-emerald2">Lab</span></span>
+      <a href="#comprar"
+        class="gradient-emerald text-white text-xs font-bold px-5 py-2 rounded-full shadow hover:opacity-90 transition-opacity">
+        Comprar Ahora
+      </a>
+    </div>
+  </nav>
+
+  <!-- ══════════════════════════════════════════════
+     [S2] HERO — 2 COLUMNAS
+══════════════════════════════════════════════ -->
+  <section class="gradient-hero pb-14 pt-10 sm:pt-16 relative overflow-hidden">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 grid lg:grid-cols-2 gap-10 lg:gap-14 items-center relative z-10">
+
+      <!-- Columna izquierda: Copy -->
+      <div class="order-2 lg:order-1">
+
+        <!-- Eyebrow -->
+        <div
+          class="inline-flex items-center gap-2 text-xs font-semibold tracking-widest uppercase text-clay-light border border-clay-light/40 rounded-full px-4 py-1.5 mb-5 fade-up">
+          <span class="w-2 h-2 rounded-full bg-emerald2 pulse-emerald inline-block"></span>
+          Adaptógeno Ayurvédico · Equilibrio Emocional
+        </div>
+
+        <!-- H1 -->
+        <h1 class="font-display text-white text-4xl sm:text-5xl xl:text-6xl leading-[1.1] mb-5 fade-up delay-1">
+          Ashwagandha: <span class="text-emerald2">Calma Total</span> en tu Día a Día
+        </h1>
+
+        <!-- Subtítulo -->
+        <p class="text-white/70 text-base sm:text-lg leading-relaxed mb-6 max-w-lg fade-up delay-2">
+          Withania somnifera: el adaptógeno milenario que reduce el cortisol, calma la ansiedad y te devuelve la
+          estabilidad emocional — sin dependencia, sin efectos secundarios.
+        </p>
+
+        <!-- ══ FIRMA VISUAL: ANILLO DE EQUILIBRIO ══ -->
+        <div class="flex items-center gap-5 fade-up delay-2 mb-5">
+          <div class="relative w-24 h-24 flex-shrink-0">
+            <svg viewBox="0 0 120 120" class="w-24 h-24 -rotate-90">
+              <circle cx="60" cy="60" r="54" stroke-width="10" fill="none" class="ring-track" />
+              <circle id="ring-fill" cx="60" cy="60" r="54" stroke-width="10" fill="none" class="ring-fill" />
+            </svg>
+            <div class="absolute inset-0 flex flex-col items-center justify-center">
+              <span class="font-display text-xl text-white font-bold leading-none" id="ring-pct">22%</span>
+              <span class="text-[9px] uppercase tracking-wide text-white/45 mt-0.5">Equilibrio</span>
+            </div>
+          </div>
+          <p class="text-white/60 text-sm leading-snug">
+            De ansiedad constante a <span class="text-emerald2 font-semibold">calma sostenida</span><br>
+            <span class="text-white/35 text-xs">Promedio auto-reportado a las 6 semanas de uso</span>
+          </p>
+        </div>
+
+        <!-- Breathing cue -->
+        <div class="inline-flex items-center gap-2 text-white/45 text-xs mb-7 fade-up delay-2">
+          <span class="w-2 h-2 rounded-full bg-emerald2-light breathe-dot inline-block"
+            style="background:var(--emerald-l)"></span>
+          Inhala 4s · Exhala 6s — tu pausa consciente, aquí y ahora
+        </div>
+
+        <!-- USPs -->
+        <ul class="space-y-2.5 mb-8 fade-up delay-3">
+          <li class="flex items-center gap-3 text-white/85 text-sm">
+            <span class="w-5 h-5 rounded-full gradient-cta flex-shrink-0 flex items-center justify-center">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5">
+                <path d="M20 6L9 17l-5-5" />
+              </svg>
+            </span>
+            Reduce el cortisol y el estrés de forma medible
+          </li>
+          <li class="flex items-center gap-3 text-white/85 text-sm">
+            <span class="w-5 h-5 rounded-full gradient-cta flex-shrink-0 flex items-center justify-center">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5">
+                <path d="M20 6L9 17l-5-5" />
+              </svg>
+            </span>
+            Calma la ansiedad sin sedarte ni perder energía
+          </li>
+          <li class="flex items-center gap-3 text-white/85 text-sm">
+            <span class="w-5 h-5 rounded-full gradient-cta flex-shrink-0 flex items-center justify-center">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5">
+                <path d="M20 6L9 17l-5-5" />
+              </svg>
+            </span>
+            Mejora el ánimo y la resiliencia emocional
+          </li>
+          <li class="flex items-center gap-3 text-white/85 text-sm">
+            <span class="w-5 h-5 rounded-full gradient-cta flex-shrink-0 flex items-center justify-center">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5">
+                <path d="M20 6L9 17l-5-5" />
+              </svg>
+            </span>
+            Adaptógeno ayurvédico, usado hace más de 3.000 años
+          </li>
+        </ul>
+
+        <!-- Stars -->
+        <div class="flex items-center gap-2 mb-7 fade-up delay-3">
+          <div class="flex text-clay-light text-xl">★★★★★</div>
+          <span class="text-white/55 text-sm"><strong class="text-white">4,9/5</strong> · 5.482 personas con más
+            calma</span>
+        </div>
+
+        <!-- Caja de compra -->
+        <div id="comprar" class="bg-white/6 border border-white/12 rounded-2xl p-5 fade-up delay-4">
+
+          <!-- Precio -->
+          <div class="flex items-end gap-3 mb-1">
+            <span class="font-display text-4xl text-white font-bold">$60.000</span>
+            <span class="text-white/45 text-sm line-through mb-1">$85.000</span>
+            <span class="text-xs font-bold text-emerald2 bg-emerald2/20 px-2.5 py-1 rounded-full mb-1">29% OFF</span>
+          </div>
+          <p class="text-white/45 text-xs mb-4">COP · Frasco 60 cápsulas · 30 días de equilibrio</p>
+
+          <!-- Código descuento -->
+          <div class="flex items-center gap-3 bg-clay/10 border border-clay/30 rounded-xl px-4 py-2.5 mb-4">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--clay-l)" stroke-width="2">
+              <path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z" />
+              <line x1="7" y1="7" x2="7.01" y2="7" />
+            </svg>
+            <span class="font-display text-clay-light text-sm font-bold tracking-widest">CALMATOTAL</span>
+            <span class="text-white/45 text-xs ml-auto">15% descuento adicional</span>
+          </div>
+
+          <!-- CTA WhatsApp -->
+          <a href="https://wa.me/573000000000?text=Hola,%20quiero%20pedir%20Ashwagandha%20con%20c%C3%B3digo%20CALMATOTAL"
+            target="_blank"
+            class="block w-full gradient-cta text-white font-bold text-base py-4 rounded-xl text-center shadow-lg hover:opacity-92 transition-opacity mb-3">
+            🌿 PEDIR POR WHATSAPP — Envío Gratis
+          </a>
+          <p class="text-center text-white/38 text-xs">
+            🚚 Medellín en 24h · Resto Colombia 2–4 días · Sin costos ocultos
+          </p>
+        </div>
+
+        <!-- Stock bar -->
+        <div class="mt-4 fade-up delay-4">
+          <div class="flex justify-between text-xs text-white/55 mb-1.5">
+            <span>🔥 Stock disponible hoy</span>
+            <span class="font-semibold text-emerald2">64% vendido</span>
+          </div>
+          <div class="w-full bg-white/10 rounded-full h-2">
+            <div class="stock-bar"></div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Columna derecha: Galería -->
+      <div class="order-1 lg:order-2 flex flex-col items-center gap-4">
+        <div class="relative w-full flex justify-center">
+          <!-- Ondas de respiración / oasis -->
+          <div class="oasis-ripple"></div>
+          <div class="oasis-ripple" style="animation-delay:1.5s"></div>
+          <div class="oasis-ripple" style="animation-delay:3s"></div>
+
+          <img id="hero-img" src="img/hero-bottle.jpg" alt="Ashwagandha — Calma natural en cápsulas"
+            class="product-img w-full max-w-sm lg:max-w-md rounded-2xl relative z-10" />
+          <!-- Badge precio -->
+          <div
+            class="absolute top-4 right-4 w-22 h-22 gradient-emerald rounded-full flex flex-col items-center justify-center shadow-glow p-4 z-20">
+            <span class="font-display text-white text-xs font-bold leading-tight text-center">PRECIO<br>$60.000</span>
+          </div>
+        </div>
+
+        <!-- Miniaturas -->
+        <div class="flex gap-3 justify-center relative z-10">
+          <button onclick="setImg(0,this)"
+            class="thumb-btn active w-16 h-16 rounded-xl border-2 border-emerald2 bg-moss overflow-hidden">
+            <img src="img/hero-bottle.jpg" class="w-full h-full object-cover" alt="Frasco completo" />
+          </button>
+          <button onclick="setImg(1,this)"
+            class="thumb-btn w-16 h-16 rounded-xl border-2 border-white/20 bg-moss overflow-hidden opacity-60 hover:opacity-100 hover:border-emerald2/60 transition-all">
+            <img src="img/frasco-superior.jpg" class="w-full h-full object-cover" alt="Vista superior" />
+          </button>
+          <button onclick="setImg(2,this)"
+            class="thumb-btn w-16 h-16 rounded-xl border-2 border-white/20 bg-moss overflow-hidden opacity-60 hover:opacity-100 hover:border-emerald2/60 transition-all">
+            <img src="img/detalle-capsulas.jpg" class="w-full h-full object-cover" alt="Detalle de cápsulas" />
+          </button>
+          <button onclick="setImg(3,this)"
+            class="thumb-btn w-16 h-16 rounded-xl border-2 border-white/20 bg-moss overflow-hidden opacity-60 hover:opacity-100 hover:border-emerald2/60 transition-all">
+            <img src="img/detalle-raiz.jpg" class="w-full h-full object-cover" alt="Detalle de la raíz" />
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+     [S3] TRUST STRIP
+══════════════════════════════════════════════ -->
+  <section class="bg-linen py-5 border-y border-emerald-100">
+    <div
+      class="max-w-5xl mx-auto px-4 flex flex-wrap justify-center gap-6 sm:gap-10 text-sm font-semibold text-moss/65">
+      <div class="flex items-center gap-2">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--emerald)" stroke-width="2">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+        </svg>
+        Calidad garantizada
+      </div>
+      <div class="flex items-center gap-2">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--emerald)" stroke-width="2">
+          <rect x="1" y="3" width="15" height="13" />
+          <polygon points="16 8 20 8 23 11 23 16 16 16 16 8" />
+          <circle cx="5.5" cy="18.5" r="2.5" />
+          <circle cx="18.5" cy="18.5" r="2.5" />
+        </svg>
+        Envío gratis
+      </div>
+      <div class="flex items-center gap-2">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--emerald)" stroke-width="2">
+          <line x1="12" y1="1" x2="12" y2="23" />
+          <path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" />
+        </svg>
+        Pago contra entrega
+      </div>
+      <div class="flex items-center gap-2">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--emerald)" stroke-width="2">
+          <circle cx="12" cy="12" r="10" />
+          <polyline points="12 6 12 12 16 14" />
+        </svg>
+        Entrega 2–4 días
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+     [S4] PROBLEM / SOLUTION
+══════════════════════════════════════════════ -->
+  <section class="py-16 sm:py-20 bg-white relative overflow-hidden">
+    <div class="blob w-80 h-80 bg-emerald-100/60 -top-24 -left-24"></div>
+    <div class="blob w-72 h-72 bg-clay/10 bottom-0 -right-16"></div>
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 relative z-10">
+      <div class="text-center mb-12">
+        <div class="divider-emerald"></div>
+        <h2 class="font-display text-3xl sm:text-4xl text-moss mb-4">¿Sientes que vives en alerta constante?</h2>
+        <p class="text-moss/55 max-w-xl mx-auto text-base leading-relaxed">
+          El cortisol alto te mantiene en modo supervivencia: ansioso, irritable, agotado — incluso cuando
+          "no pasa nada".
+        </p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 gap-6">
+        <!-- Pain card -->
+        <div class="rounded-2xl bg-zinc-50 border border-zinc-100 p-6 sm:p-8">
+          <div class="w-10 h-10 rounded-xl bg-zinc-100 flex items-center justify-center mb-4">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6b7280" stroke-width="2">
+              <circle cx="12" cy="12" r="10" />
+              <line x1="12" y1="8" x2="12" y2="12" />
+              <line x1="12" y1="16" x2="12.01" y2="16" />
+            </svg>
+          </div>
+          <h3 class="font-display text-xl text-zinc-700 mb-3">El ciclo del estrés crónico</h3>
+          <ul class="space-y-2.5 text-sm text-zinc-500">
+            <li class="flex gap-2"><span class="text-zinc-300 mt-0.5">✕</span> Cortisol elevado todo el día, incluso
+              sin razón aparente</li>
+            <li class="flex gap-2"><span class="text-zinc-300 mt-0.5">✕</span> Ansiedad de fondo que no se apaga
+            </li>
+            <li class="flex gap-2"><span class="text-zinc-300 mt-0.5">✕</span> Irritabilidad por cosas pequeñas</li>
+            <li class="flex gap-2"><span class="text-zinc-300 mt-0.5">✕</span> Sensación de estar "quemado"
+              (burnout)</li>
+            <li class="flex gap-2"><span class="text-zinc-300 mt-0.5">✕</span> Sueño que no alcanza a recuperarte
+            </li>
+          </ul>
+        </div>
+
+        <!-- Solution card -->
+        <div class="rounded-2xl bg-emerald2/5 border border-emerald2/20 p-6 sm:p-8">
+          <div class="w-10 h-10 rounded-xl bg-emerald2/12 flex items-center justify-center mb-4">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--emerald)" stroke-width="2">
+              <path
+                d="M12 3a6 6 0 000 18 9 9 0 009-9c0-.46-.04-.92-.1-1.36a5.5 5.5 0 01-7.54-7.54A8.94 8.94 0 0012 3z" />
+            </svg>
+          </div>
+          <h3 class="font-display text-xl text-emerald2 mb-3">Con Ashwagandha</h3>
+          <ul class="space-y-2.5 text-sm text-moss/70">
+            <li class="flex gap-2"><span class="text-emerald2 mt-0.5">✓</span> Cortisol regulado de forma natural y
+              medible</li>
+            <li class="flex gap-2"><span class="text-emerald2 mt-0.5">✓</span> Calma de fondo, sin perder energía
+              ni motivación</li>
+            <li class="flex gap-2"><span class="text-emerald2 mt-0.5">✓</span> Mayor resiliencia ante el estrés
+              diario</li>
+            <li class="flex gap-2"><span class="text-emerald2 mt-0.5">✓</span> Recuperación real de la fatiga
+              adrenal</li>
+            <li class="flex gap-2"><span class="text-emerald2 mt-0.5">✓</span> Sueño más reparador, despertar con
+              más calma</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- VS bridge -->
+      <div class="mt-6 gradient-cta rounded-xl p-5 text-center">
+        <p class="text-white font-semibold text-sm">
+          🌿 La diferencia: los estimulantes tapan el cansancio. La Ashwagandha regula la raíz hormonal del estrés
+          — el cortisol. Uno es un parche. El otro, una reprogramación.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+     [S5] INGREDIENT — DETALLE ASHWAGANDHA
+══════════════════════════════════════════════ -->
+  <section class="py-16 sm:py-20 clip-top clip-bottom bg-moss">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-12">
+        <div class="divider-emerald"></div>
+        <h2 class="font-display text-3xl sm:text-4xl text-white mb-4">La <span class="text-emerald2">Raíz</span>
+          que Equilibra tu Sistema</h2>
+        <p class="text-white/50 max-w-lg mx-auto">Withania somnifera: pilar de la medicina ayurvédica desde hace
+          más de 3.000 años, hoy respaldada por estudios sobre el eje hipotálamo-hipófisis-adrenal.</p>
+      </div>
+
+      <div class="grid sm:grid-cols-3 gap-5 mb-8">
+        <!-- Mecanismo 1 -->
+        <div class="ingredient-card bg-white/6 border border-white/10 rounded-2xl p-6">
+          <div class="text-3xl mb-4">⚖️</div>
+          <h4 class="font-display text-white font-bold mb-2">Regulación del Eje HPA</h4>
+          <p class="text-white/55 text-sm leading-relaxed">Modula el eje hipotálamo-hipófisis-adrenal, normalizando
+            la producción de cortisol ante el estrés.</p>
+        </div>
+
+        <!-- Mecanismo 2 -->
+        <div class="ingredient-card bg-white/6 border border-white/10 rounded-2xl p-6">
+          <div class="text-3xl mb-4">🧬</div>
+          <h4 class="font-display text-white font-bold mb-2">Withanólidos Activos</h4>
+          <p class="text-white/55 text-sm leading-relaxed">Compuestos bioactivos con propiedades adaptógenas,
+            ansiolíticas y antiinflamatorias estudiadas clínicamente.</p>
+        </div>
+
+        <!-- Mecanismo 3 -->
+        <div class="ingredient-card bg-white/6 border border-white/10 rounded-2xl p-6">
+          <div class="text-3xl mb-4">🛡️</div>
+          <h4 class="font-display text-white font-bold mb-2">Resiliencia Celular</h4>
+          <p class="text-white/55 text-sm leading-relaxed">Protege las células del estrés oxidativo causado por el
+            cortisol crónicamente elevado.</p>
+        </div>
+      </div>
+
+      <!-- Beneficios expandidos -->
+      <div class="grid sm:grid-cols-2 gap-5">
+        <div class="bg-white/5 border border-white/8 rounded-2xl p-5">
+          <h4 class="font-display text-white font-semibold mb-3 flex items-center gap-2">
+            <span class="text-emerald2">🧠</span> Para tu mente
+          </h4>
+          <ul class="space-y-2">
+            <li class="flex gap-2 text-sm text-white/70"><span class="text-emerald2">→</span> Reduce
+              significativamente los niveles de cortisol</li>
+            <li class="flex gap-2 text-sm text-white/70"><span class="text-emerald2">→</span> Calma la ansiedad sin
+              sedación</li>
+            <li class="flex gap-2 text-sm text-white/70"><span class="text-emerald2">→</span> Mejora el estado de
+              ánimo general</li>
+            <li class="flex gap-2 text-sm text-white/70"><span class="text-emerald2">→</span> Mayor claridad y
+              enfoque bajo presión</li>
+          </ul>
+        </div>
+        <div class="bg-white/5 border border-white/8 rounded-2xl p-5">
+          <h4 class="font-display text-white font-semibold mb-3 flex items-center gap-2">
+            <span class="text-clay-light">🌿</span> Para tu cuerpo
+          </h4>
+          <ul class="space-y-2">
+            <li class="flex gap-2 text-sm text-white/70"><span class="text-clay-light">→</span> Sueño más profundo
+              y reparador</li>
+            <li class="flex gap-2 text-sm text-white/70"><span class="text-clay-light">→</span> Recuperación de la
+              fatiga adrenal</li>
+            <li class="flex gap-2 text-sm text-white/70"><span class="text-clay-light">→</span> Mejor función
+              inmune</li>
+            <li class="flex gap-2 text-sm text-white/70"><span class="text-clay-light">→</span> Energía estable,
+              sin agotamiento</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+     [S6] TABS — INFO INTERACTIVA (Alpine.js)
+══════════════════════════════════════════════ -->
+  <section class="py-16 sm:py-20 bg-linen relative overflow-hidden" x-data="{ tab: 'ciencia' }">
+    <div class="blob w-72 h-72 bg-emerald-100/50 top-10 -right-20"></div>
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 relative z-10">
+      <div class="text-center mb-10">
+        <div class="divider-emerald"></div>
+        <h2 class="font-display text-3xl sm:text-4xl text-moss mb-3">Todo lo que necesitas saber</h2>
+        <p class="text-moss/50 text-sm">Ciencia, protocolo de uso y cómo maximizar tu equilibrio natural.</p>
+      </div>
+
+      <!-- Tab buttons -->
+      <div class="flex overflow-x-auto no-scroll border-b border-emerald-100 mb-8 gap-0">
+        <button @click="tab='ciencia'"
+          :class="tab==='ciencia' ? 'border-b-2 border-emerald2 text-emerald2 font-semibold' : 'text-zinc-500 font-medium hover:text-moss'"
+          class="whitespace-nowrap px-5 py-3 text-sm transition-all">
+          🔬 Ciencia
+        </button>
+        <button @click="tab='uso'"
+          :class="tab==='uso' ? 'border-b-2 border-emerald2 text-emerald2 font-semibold' : 'text-zinc-500 font-medium hover:text-moss'"
+          class="whitespace-nowrap px-5 py-3 text-sm transition-all">
+          📋 Modo de Uso
+        </button>
+        <button @click="tab='estilo'"
+          :class="tab==='estilo' ? 'border-b-2 border-emerald2 text-emerald2 font-semibold' : 'text-zinc-500 font-medium hover:text-moss'"
+          class="whitespace-nowrap px-5 py-3 text-sm transition-all">
+          🥗 Estilo de Vida
+        </button>
+        <button @click="tab='estudios'"
+          :class="tab==='estudios' ? 'border-b-2 border-emerald2 text-emerald2 font-semibold' : 'text-zinc-500 font-medium hover:text-moss'"
+          class="whitespace-nowrap px-5 py-3 text-sm transition-all">
+          📄 Estudios
+        </button>
+      </div>
+
+      <!-- Tab panels -->
+      <div>
+
+        <!-- Ciencia -->
+        <div x-show="tab==='ciencia'" x-transition:enter="transition duration-300 ease-out"
+          x-transition:enter-start="opacity-0 translate-y-2" x-transition:enter-end="opacity-100 translate-y-0">
+          <div class="grid sm:grid-cols-3 gap-5">
+            <div class="bg-white rounded-2xl p-5 border border-emerald-100 shadow-card">
+              <div class="w-10 h-10 rounded-xl bg-emerald-50 flex items-center justify-center mb-3 text-xl">⚖️</div>
+              <h4 class="font-semibold text-moss mb-2">Eje HPA</h4>
+              <p class="text-zinc-500 text-sm leading-relaxed">El eje hipotálamo-hipófisis-adrenal es el sistema
+                que regula tu respuesta al estrés. La Ashwagandha lo ayuda a normalizarse en vez de quedar "encendido"
+                todo el día.</p>
+            </div>
+            <div class="bg-white rounded-2xl p-5 border border-emerald-100 shadow-card">
+              <div class="w-10 h-10 rounded-xl bg-amber-50 flex items-center justify-center mb-3 text-xl">🧬</div>
+              <h4 class="font-semibold text-moss mb-2">Withanólidos</h4>
+              <p class="text-zinc-500 text-sm leading-relaxed">Los compuestos activos de la raíz tienen propiedades
+                adaptógenas estudiadas por su capacidad de ayudar al cuerpo a resistir el estrés físico y emocional.
+              </p>
+            </div>
+            <div class="bg-white rounded-2xl p-5 border border-emerald-100 shadow-card">
+              <div class="w-10 h-10 rounded-xl bg-red-50 flex items-center justify-center mb-3 text-xl">🛡️</div>
+              <h4 class="font-semibold text-moss mb-2">Estrés Oxidativo</h4>
+              <p class="text-zinc-500 text-sm leading-relaxed">El cortisol crónico genera desgaste celular. Los
+                antioxidantes de la Ashwagandha ayudan a proteger tejidos nerviosos de ese desgaste acumulado.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modo de Uso -->
+        <div x-show="tab==='uso'" x-transition:enter="transition duration-300 ease-out"
+          x-transition:enter-start="opacity-0 translate-y-2" x-transition:enter-end="opacity-100 translate-y-0">
+          <div class="bg-white rounded-2xl border border-emerald-100 shadow-card overflow-hidden">
+            <div class="p-6 border-b border-emerald-50">
+              <h4 class="font-display text-xl text-moss mb-1">Protocolo Diario Recomendado</h4>
+              <p class="text-zinc-500 text-sm">Resultados visibles en 2–4 semanas de uso constante.</p>
+            </div>
+            <div class="divide-y divide-emerald-50">
+              <div class="flex gap-4 p-5">
+                <div class="w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center text-sm flex-shrink-0">
+                  🌅</div>
+                <div>
+                  <p class="font-semibold text-moss text-sm">Mañana con el desayuno</p>
+                  <p class="text-zinc-500 text-sm mt-0.5">1 cápsula junto al desayuno, para acompañar el inicio del
+                    día con una base de calma.</p>
+                </div>
+              </div>
+              <div class="flex gap-4 p-5">
+                <div class="w-8 h-8 rounded-full bg-amber-100 flex items-center justify-center text-sm flex-shrink-0">
+                  🌙</div>
+                <div>
+                  <p class="font-semibold text-moss text-sm">Noche con la cena</p>
+                  <p class="text-zinc-500 text-sm mt-0.5">1 cápsula junto a la cena. Repartir la dosis ayuda a
+                    mantener niveles estables del adaptógeno durante todo el día.</p>
+                </div>
+              </div>
+              <div class="flex gap-4 p-5">
+                <div class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center text-sm flex-shrink-0">💧
+                </div>
+                <div>
+                  <p class="font-semibold text-moss text-sm">Constancia ante todo</p>
+                  <p class="text-zinc-500 text-sm mt-0.5">La clave es la regularidad — los adaptógenos construyen su
+                    efecto con el tiempo, no de un día para otro.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Estilo de Vida -->
+        <div x-show="tab==='estilo'" x-transition:enter="transition duration-300 ease-out"
+          x-transition:enter-start="opacity-0 translate-y-2" x-transition:enter-end="opacity-100 translate-y-0">
+          <div class="grid sm:grid-cols-2 gap-5">
+            <div class="bg-white rounded-2xl p-5 border border-emerald-100 shadow-card">
+              <h4 class="font-semibold text-moss mb-3 flex items-center gap-2">🥗 Alimentación que potencia el
+                equilibrio</h4>
+              <ul class="space-y-2 text-sm text-zinc-600">
+                <li class="flex gap-2"><span class="text-emerald2">•</span> Magnesio (espinaca, almendras, cacao) —
+                  relajación muscular y nerviosa</li>
+                <li class="flex gap-2"><span class="text-emerald2">•</span> Omega-3 (salmón, linaza) — reduce la
+                  inflamación asociada al estrés</li>
+                <li class="flex gap-2"><span class="text-emerald2">•</span> Reducir azúcar y cafeína en exceso —
+                  generan picos que elevan el cortisol</li>
+                <li class="flex gap-2"><span class="text-emerald2">•</span> Probióticos — sostienen el eje
+                  intestino-cerebro y el ánimo</li>
+                <li class="flex gap-2"><span class="text-emerald2">•</span> Hidratación constante — el cuerpo
+                  gestiona mejor el estrés bien hidratado</li>
+              </ul>
+            </div>
+            <div class="bg-white rounded-2xl p-5 border border-emerald-100 shadow-card">
+              <h4 class="font-semibold text-moss mb-3 flex items-center gap-2">🧘 Hábitos que multiplican la calma
+              </h4>
+              <ul class="space-y-2 text-sm text-zinc-600">
+                <li class="flex gap-2"><span class="text-clay">•</span> Respiración diafragmática 5 min al día —
+                  activa el sistema parasimpático</li>
+                <li class="flex gap-2"><span class="text-clay">•</span> Exposición a luz natural en la mañana —
+                  regula el cortisol y el ritmo circadiano</li>
+                <li class="flex gap-2"><span class="text-clay">•</span> Pausas activas cada 90 min de trabajo —
+                  evita la acumulación de tensión</li>
+                <li class="flex gap-2"><span class="text-clay">•</span> Tiempo en espacios verdes — reductor
+                  comprobado de cortisol</li>
+                <li class="flex gap-2"><span class="text-clay">•</span> Consistencia 30 días — los adaptógenos
+                  mejoran con el tiempo</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Estudios -->
+        <div x-show="tab==='estudios'" x-transition:enter="transition duration-300 ease-out"
+          x-transition:enter-start="opacity-0 translate-y-2" x-transition:enter-end="opacity-100 translate-y-0">
+          <div class="space-y-4">
+            <div class="bg-white rounded-2xl p-5 border-l-4 border-emerald2 border border-emerald-100 shadow-card">
+              <p class="text-moss/75 text-sm leading-relaxed italic mb-2">
+                Estudios clínicos con extracto de Withania somnifera muestran reducciones relevantes en los niveles
+                de cortisol sérico frente a placebo, en programas de varias semanas de suplementación.
+              </p>
+              <p class="text-zinc-400 text-xs">Journal of Ayurveda and Integrative Medicine — referencia general
+                sobre el compuesto</p>
+            </div>
+            <div class="bg-white rounded-2xl p-5 border-l-4 border-emerald2 border border-emerald-100 shadow-card">
+              <p class="text-moss/75 text-sm leading-relaxed italic mb-2">
+                Participantes con estrés crónico reportaron menor percepción de ansiedad y mejor calidad de sueño
+                tras semanas de suplementación con Ashwagandha frente al grupo control.
+              </p>
+              <p class="text-zinc-400 text-xs">Indian Journal of Psychological Medicine — referencia general sobre
+                el compuesto</p>
+            </div>
+            <div class="bg-white rounded-2xl p-5 border-l-4 border-clay border border-emerald-100 shadow-card">
+              <p class="text-moss/75 text-sm leading-relaxed italic mb-2">
+                Los withanólidos presentes en la raíz demostraron actividad antioxidante, protegiendo células
+                nerviosas del daño asociado al estrés oxidativo crónico en modelos preclínicos.
+              </p>
+              <p class="text-zinc-400 text-xs">Phytomedicine — referencia general sobre el compuesto</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+     [S7] TIMELINE — RESULTADOS ESPERADOS
+══════════════════════════════════════════════ -->
+  <section class="py-16 sm:py-20 bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-12">
+        <div class="divider-emerald"></div>
+        <h2 class="font-display text-3xl sm:text-4xl text-moss mb-3">¿Qué esperar y cuándo?</h2>
+        <p class="text-moss/50 text-sm">Los adaptógenos actúan de forma progresiva. La consistencia es tu mayor
+          ventaja.</p>
+      </div>
+
+      <div class="relative">
+        <div
+          class="absolute left-5 sm:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-emerald2/40 via-clay/40 to-emerald2/40 -translate-x-1/2 hidden sm:block">
+        </div>
+
+        <div class="space-y-8">
+          <!-- Semana 1 -->
+          <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-8">
+            <div class="sm:w-1/2 sm:text-right sm:pr-10">
+              <div
+                class="inline-block font-display text-sm text-emerald2 border border-emerald2/35 rounded-full px-3 py-1 mb-2">
+                Días 3–7</div>
+              <h4 class="font-semibold text-moss">Primera señal</h4>
+              <p class="text-zinc-500 text-sm mt-1">Muchos notan menor irritabilidad y una sensación sutil de
+                "poder respirar mejor" frente a situaciones de estrés.</p>
+            </div>
+            <div
+              class="hidden sm:flex w-10 h-10 rounded-full gradient-cta flex-shrink-0 items-center justify-center text-white font-bold z-10">
+              1</div>
+            <div class="sm:w-1/2 sm:pl-10 hidden sm:block"></div>
+          </div>
+
+          <!-- Semana 2-3 -->
+          <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-8">
+            <div class="sm:w-1/2 sm:pr-10 hidden sm:block"></div>
+            <div
+              class="hidden sm:flex w-10 h-10 rounded-full gradient-clay flex-shrink-0 items-center justify-center text-moss font-bold z-10">
+              2</div>
+            <div class="sm:w-1/2 sm:pl-10">
+              <div
+                class="inline-block font-display text-sm text-emerald2 border border-emerald2/35 rounded-full px-3 py-1 mb-2">
+                Semana 2–3</div>
+              <h4 class="font-semibold text-moss">Calma medible</h4>
+              <p class="text-zinc-500 text-sm mt-1">Mejor tolerancia al estrés diario, sueño más reparador, menos
+                tensión física acumulada (mandíbula, hombros).</p>
+            </div>
+          </div>
+
+          <!-- Semana 4-6 -->
+          <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-8">
+            <div class="sm:w-1/2 sm:text-right sm:pr-10">
+              <div
+                class="inline-block font-display text-sm text-emerald2 border border-emerald2/35 rounded-full px-3 py-1 mb-2">
+                Semana 4–6</div>
+              <h4 class="font-semibold text-moss">Equilibrio establecido</h4>
+              <p class="text-zinc-500 text-sm mt-1">Cortisol basal más regulado. Resiliencia emocional notablemente
+                mayor. La sensación de "estar quemado" da paso a una calma sostenida.</p>
+            </div>
+            <div
+              class="hidden sm:flex w-10 h-10 rounded-full gradient-cta flex-shrink-0 items-center justify-center text-white font-bold z-10">
+              3</div>
+            <div class="sm:w-1/2 sm:pl-10 hidden sm:block"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+     [S8] TESTIMONIOS
+══════════════════════════════════════════════ -->
+  <section class="py-16 sm:py-20 bg-moss">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-12">
+        <div class="divider-emerald"></div>
+        <h2 class="font-display text-3xl sm:text-4xl text-white mb-3">Ellos ya encontraron <span
+            class="text-emerald2">su oasis</span></h2>
+        <p class="text-white/45 text-sm">Testimonios reales de Colombia.</p>
+      </div>
+
+      <div class="grid sm:grid-cols-3 gap-5">
+        <div class="review-card">
+          <div class="flex text-emerald2 text-sm mb-3">★★★★★</div>
+          <p class="text-zinc-600 text-sm leading-relaxed mb-4">"Vivía con la mandíbula apretada todo el día. A las
+            3 semanas de tomar Ashwagandha noté que por fin podía relajar los hombros sin darme cuenta. El cambio
+            fue real, no placebo."</p>
+          <div class="flex items-center gap-3">
+            <div
+              class="w-8 h-8 rounded-full gradient-cta flex items-center justify-center text-white text-xs font-bold">
+              CV</div>
+            <div>
+              <p class="font-semibold text-moss text-xs">Catalina V.</p>
+              <p class="text-zinc-400 text-xs">Bogotá · Abogada</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="review-card">
+          <div class="flex text-emerald2 text-sm mb-3">★★★★★</div>
+          <p class="text-zinc-600 text-sm leading-relaxed mb-4">"Mi ansiedad antes de reuniones importantes bajó
+            muchísimo. Sigo igual de enfocado, pero sin esa sensación de estar al borde todo el tiempo."</p>
+          <div class="flex items-center gap-3">
+            <div
+              class="w-8 h-8 rounded-full bg-emerald-600 flex items-center justify-center text-white text-xs font-bold">
+              RT</div>
+            <div>
+              <p class="font-semibold text-moss text-xs">Ricardo T.</p>
+              <p class="text-zinc-400 text-xs">Medellín · Emprendedor</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="review-card">
+          <div class="flex text-emerald2 text-sm mb-3">★★★★★</div>
+          <p class="text-zinc-600 text-sm leading-relaxed mb-4">"Dormía mal por rumiar el día siguiente. Ahora apago
+            la cabeza más fácil. Mi pausa con Ashwagandha se volvió mi ritual de las noches."</p>
+          <div class="flex items-center gap-3">
+            <div
+              class="w-8 h-8 rounded-full bg-amber-700 flex items-center justify-center text-white text-xs font-bold">
+              NP</div>
+            <div>
+              <p class="font-semibold text-moss text-xs">Natalia P.</p>
+              <p class="text-zinc-400 text-xs">Cali · Profesora</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-8 text-center">
+        <div class="inline-flex items-center gap-3 bg-white/8 border border-white/12 rounded-full px-6 py-2.5">
+          <div class="flex text-emerald2">★★★★★</div>
+          <span class="text-white text-sm"><strong>4,9 / 5</strong> · 5.482 calificaciones verificadas</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+     [S9] CTA FINAL + DELIVERY TIMELINE
+══════════════════════════════════════════════ -->
+  <section class="py-16 sm:py-20 bg-linen relative overflow-hidden">
+    <div class="blob w-96 h-96 bg-emerald-100/50 -bottom-32 -left-32"></div>
+    <div class="max-w-2xl mx-auto px-4 sm:px-6 text-center relative z-10">
+      <div class="divider-emerald"></div>
+      <h2 class="font-display text-3xl sm:text-4xl text-moss mb-3">Encuentra tu <span class="text-emerald2">oasis</span>
+        hoy</h2>
+      <p class="text-moss/50 text-base mb-8 max-w-md mx-auto">No esperes a que el estrés decida por ti. El
+        equilibrio empieza en tu próxima cápsula.</p>
+
+      <div class="bg-white rounded-3xl border border-emerald-100 shadow-card p-6 sm:p-8 text-left">
+
+        <!-- Product summary -->
+        <div class="flex items-center gap-4 mb-5 pb-5 border-b border-emerald-50">
+          <div class="text-4xl">🌿</div>
+          <div>
+            <h3 class="font-display text-moss text-lg">Ashwagandha — Calma Total</h3>
+            <p class="text-zinc-500 text-sm">60 cápsulas · 30 días de equilibrio</p>
+          </div>
+          <div class="ml-auto text-right">
+            <p class="font-display text-2xl text-moss font-bold">$60.000</p>
+            <p class="text-zinc-400 text-xs line-through">$85.000</p>
+          </div>
+        </div>
+
+        <!-- Código activo -->
+        <div class="flex items-center gap-3 bg-emerald2/6 border border-emerald2/20 rounded-xl px-4 py-3 mb-5">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--emerald)" stroke-width="2">
+            <path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z" />
+            <line x1="7" y1="7" x2="7.01" y2="7" />
+          </svg>
+          <span class="font-display text-emerald2 text-sm font-bold tracking-widest">CALMATOTAL</span>
+          <span class="ml-auto text-xs text-emerald2/65 font-medium">✓ 15% adicional aplicado</span>
+        </div>
+
+        <!-- CTA -->
+        <a href="https://wa.me/573000000000?text=Hola,%20quiero%20Ashwagandha%20con%20c%C3%B3digo%20CALMATOTAL"
+          target="_blank"
+          class="block w-full gradient-cta text-white font-bold text-lg py-4 rounded-xl text-center shadow-lg hover:opacity-92 transition-opacity mb-3">
+          🌿 PEDIR AHORA — Envío GRATIS
+        </a>
+
+        <p class="text-center text-zinc-400 text-xs mb-5">
+          WhatsApp directo · Pago Contraentrega · Sin tarjeta requerida
+        </p>
+
+        <!-- Delivery timeline -->
+        <div class="bg-emerald-50/60 rounded-xl p-4">
+          <p class="text-xs text-center text-zinc-500 mb-3">📦 Pedido hoy → Entrega estimada</p>
+          <div class="flex justify-between relative">
+            <div class="absolute top-3 left-6 right-6 h-0.5 bg-emerald2/35"></div>
+            <div class="flex flex-col items-center z-10">
+              <div class="w-6 h-6 rounded-full gradient-cta flex items-center justify-center mb-1">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3">
+                  <path d="M20 6L9 17l-5-5" />
+                </svg>
+              </div>
+              <span class="text-[10px] font-bold text-moss">Jun 26</span>
+              <span class="text-[10px] text-zinc-400">Hoy</span>
+            </div>
+            <div class="flex flex-col items-center z-10">
+              <div class="w-6 h-6 rounded-full gradient-cta flex items-center justify-center mb-1">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3">
+                  <rect x="1" y="3" width="15" height="13" />
+                  <polygon points="16 8 20 8 23 11 23 16 16 16 16 8" />
+                </svg>
+              </div>
+              <span class="text-[10px] font-bold text-moss">Jun 27</span>
+              <span class="text-[10px] text-zinc-400">Despacho</span>
+            </div>
+            <div class="flex flex-col items-center z-10">
+              <div class="w-6 h-6 rounded-full border-2 border-emerald2 bg-white flex items-center justify-center mb-1">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="var(--emerald)" stroke-width="3">
+                  <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" />
+                </svg>
+              </div>
+              <span class="text-[10px] font-bold text-moss">Jun 29–Jul 1</span>
+              <span class="text-[10px] text-zinc-400">Entregado</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Trust row -->
+        <div class="flex justify-center gap-5 mt-5 text-xs text-zinc-400">
+          <div class="flex items-center gap-1.5">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+            </svg>
+            100% seguro
+          </div>
+          <div class="flex items-center gap-1.5">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+            </svg>
+            Toda Colombia
+          </div>
+          <div class="flex items-center gap-1.5">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10" />
+              <path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3" />
+              <line x1="12" y1="17" x2="12.01" y2="17" />
+            </svg>
+            Soporte 7/7
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+     [S10] FAQ ACCORDION
+══════════════════════════════════════════════ -->
+  <section class="py-14 sm:py-18 bg-white">
+    <div class="max-w-2xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-10">
+        <div class="divider-emerald"></div>
+        <h2 class="font-display text-2xl sm:text-3xl text-moss">Preguntas frecuentes</h2>
+      </div>
+
+      <div class="space-y-0">
+        <details class="group border-b border-zinc-100 py-4">
+          <summary class="flex items-center justify-between text-sm font-semibold text-moss cursor-pointer">
+            ¿Cuánto tiempo tarda en bajar el cortisol?
+            <svg class="icon-chevron w-5 h-5 text-zinc-400 flex-shrink-0 ml-4" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor" stroke-width="2">
+              <path d="M6 9l6 6 6-6" />
+            </svg>
+          </summary>
+          <div class="mt-3 text-sm text-zinc-600 leading-relaxed pr-8">
+            Los primeros cambios subjetivos (menos irritabilidad, mejor sueño) suelen notarse en 1–2 semanas. Los
+            efectos sobre el cortisol suelen consolidarse entre la semana 4 y 8 de uso constante.
+          </div>
+        </details>
+
+        <details class="group border-b border-zinc-100 py-4">
+          <summary class="flex items-center justify-between text-sm font-semibold text-moss cursor-pointer">
+            ¿Me da sueño durante el día?
+            <svg class="icon-chevron w-5 h-5 text-zinc-400 flex-shrink-0 ml-4" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor" stroke-width="2">
+              <path d="M6 9l6 6 6-6" />
+            </svg>
+          </summary>
+          <div class="mt-3 text-sm text-zinc-600 leading-relaxed pr-8">
+            No es sedante. Regula el sistema de respuesta al estrés sin causar somnolencia diurna; la mayoría de
+            usuarios reporta sentirse más calmados pero igual de alertas y funcionales.
+          </div>
+        </details>
+
+        <details class="group border-b border-zinc-100 py-4">
+          <summary class="flex items-center justify-between text-sm font-semibold text-moss cursor-pointer">
+            ¿Puedo tomarla si tengo tiroides o estoy en tratamiento hormonal?
+            <svg class="icon-chevron w-5 h-5 text-zinc-400 flex-shrink-0 ml-4" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor" stroke-width="2">
+              <path d="M6 9l6 6 6-6" />
+            </svg>
+          </summary>
+          <div class="mt-3 text-sm text-zinc-600 leading-relaxed pr-8">
+            La Ashwagandha puede interactuar con la función tiroidea y con algunos tratamientos hormonales. Si
+            tienes una condición tiroidea o estás en tratamiento, consulta con tu médico antes de empezar.
+          </div>
+        </details>
+
+        <details class="group border-b border-zinc-100 py-4">
+          <summary class="flex items-center justify-between text-sm font-semibold text-moss cursor-pointer">
+            ¿Cómo funciona el pago contraentrega?
+            <svg class="icon-chevron w-5 h-5 text-zinc-400 flex-shrink-0 ml-4" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor" stroke-width="2">
+              <path d="M6 9l6 6 6-6" />
+            </svg>
+          </summary>
+          <div class="mt-3 text-sm text-zinc-600 leading-relaxed pr-8">
+            Recibes el paquete primero, lo inspeccionas y pagas al mensajero al momento de la entrega. Sin tarjeta
+            ni transferencia anticipada. Disponible en más de 1.000 municipios de Colombia.
+          </div>
+        </details>
+
+        <details class="group py-4">
+          <summary class="flex items-center justify-between text-sm font-semibold text-moss cursor-pointer">
+            ¿El código CALMATOTAL tiene fecha de vencimiento?
+            <svg class="icon-chevron w-5 h-5 text-zinc-400 flex-shrink-0 ml-4" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor" stroke-width="2">
+              <path d="M6 9l6 6 6-6" />
+            </svg>
+          </summary>
+          <div class="mt-3 text-sm text-zinc-600 leading-relaxed pr-8">
+            Sí — está activo mientras dure el stock de la promoción actual. Al agotarse, se retira sin aviso previo.
+            Si lo ves activo al momento de tu pedido, aplica sin restricción.
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════
+     [S11] FOOTER
+══════════════════════════════════════════════ -->
+  <footer class="bg-moss border-t border-white/10 py-10">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 text-center">
+      <span class="font-display text-white text-xl">Fungi<span class="text-emerald2">Lab</span></span>
+      <p class="text-white/30 text-xs mt-2 max-w-md mx-auto">
+        Suplementos naturales. Estos productos no están destinados a diagnosticar, tratar, curar ni prevenir
+        ninguna enfermedad. Consulta con un profesional de salud.
+      </p>
+      <div class="flex justify-center gap-5 mt-5 text-xs text-white/25">
+        <a href="#" class="hover:text-white/55 transition-colors">Términos</a>
+        <a href="#" class="hover:text-white/55 transition-colors">Privacidad</a>
+        <a href="https://wa.me/573000000000" target="_blank" class="hover:text-white/55 transition-colors">Contacto</a>
+      </div>
+      <p class="text-white/15 text-xs mt-4">© 2026 FungiLab Colombia · Todos los derechos reservados</p>
+    </div>
+  </footer>
+
+  <!-- ══════════════════════════════════════════════
+     [FLOAT] STICKY CTA MOBILE
+══════════════════════════════════════════════ -->
+  <div id="sticky-cta"
+    class="fixed bottom-0 left-0 right-0 z-50 bg-moss/95 backdrop-blur border-t border-white/12 py-3 px-4">
+    <div class="max-w-sm mx-auto flex items-center gap-3">
+      <div class="flex-1 min-w-0">
+        <p class="text-white text-xs font-semibold truncate">Ashwagandha · $60.000 COP</p>
+        <p class="text-emerald2 text-[10px]">Código: CALMATOTAL</p>
+      </div>
+      <a href="https://wa.me/573000000000?text=Hola,%20quiero%20Ashwagandha%20con%20c%C3%B3digo%20CALMATOTAL"
+        target="_blank" class="gradient-cta text-white text-xs font-bold px-5 py-2.5 rounded-xl whitespace-nowrap">
+        PEDIR AHORA
+      </a>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+     SCRIPTS
+══════════════════════════════════════════════ -->
+  <script>
+    lucide.createIcons();
+
+    // ── Galería de imágenes (fotos reales del producto) ──
+    const heroImages = [
+      "img/hero-bottle.jpg",
+      "img/frasco-superior.jpg",
+      "img/detalle-capsulas.jpg",
+      "img/detalle-raiz.jpg"
+    ];
+
+    function setImg(idx, btn) {
+      document.getElementById('hero-img').src = heroImages[idx];
+      document.querySelectorAll('.thumb-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    }
+
+    // ── FIRMA VISUAL: Anillo de Equilibrio animado ──
+    // Sube de 22% (vida sin pausas) a 94% (con Ashwagandha) al cargar la página
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        const ring = document.getElementById('ring-fill');
+        const pct = document.getElementById('ring-pct');
+        if (!ring || !pct) return;
+
+        ring.classList.add('balanced');
+
+        // Animación del número contador (ascendente)
+        let current = 22;
+        const target = 94;
+        const duration = 1800;
+        const step = (target - current) / (duration / 16);
+
+        const ticker = setInterval(() => {
+          current = Math.min(current + step, target);
+          pct.textContent = Math.round(current) + '%';
+          if (current >= target) clearInterval(ticker);
+        }, 16);
+      }, 400);
+    });
+
+    // ── Sticky CTA: aparece cuando el hero#comprar sale del viewport ──
+    const stickyCTA = document.getElementById('sticky-cta');
+    const observer = new IntersectionObserver(([entry]) => {
+      stickyCTA.classList.toggle('visible', !entry.isIntersecting);
+    }, { threshold: 0.1 });
+    observer.observe(document.getElementById('comprar'));
+  </script>
+
+</body>
+
+</html>

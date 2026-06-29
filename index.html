@@ -13,6 +13,16 @@
     href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Outfit:wght@400;500;600;700&display=swap"
     rel="stylesheet" />
 
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y1G40PZ4WV"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-Y1G40PZ4WV');
+  </script>
+
   <!-- Insertar en el <head> del archivo de Ashwagandha -->
   <script type="application/ld+json">
   {
@@ -1317,7 +1327,8 @@
         <a href="#" class="hover:text-white/55 transition-colors">Privacidad</a>
         <a href="https://wa.me/573244400734" target="_blank" class="hover:text-white/55 transition-colors">Contacto</a>
       </div>
-      <p class="text-white/15 text-xs mt-4">© <span id="footer-year"></span> FungiLab Colombia · Todos los derechos reservados</p>
+      <p class="text-white/15 text-xs mt-4">© <span id="footer-year"></span> FungiLab Colombia · Todos los derechos
+        reservados</p>
     </div>
   </footer>
 
@@ -1390,7 +1401,7 @@
     observer.observe(document.getElementById('comprar'));
 
     // ── Fechas dinámicas ──
-    const meses = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+    const meses = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
     function fmtFecha(d) { return meses[d.getMonth()] + ' ' + d.getDate(); }
 
     const hoy = new Date();
